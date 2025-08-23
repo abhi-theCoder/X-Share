@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Hackathon Experience</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main Form Container -->
+    <div class="bg-white rounded-3xl shadow-xl w-full max-w-2xl overflow-hidden no-scrollbar">
+        <div class="p-8">
+            <!-- Header and Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-3xl font-bold text-gray-800">Share Your Hackathon Experience</h1>
+                    <span id="step-info" class="text-gray-500 font-medium">Step 1 of 6</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-in-out" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Multi-step Form Content -->
+            <form id="multi-step-form" class="space-y-6">
+
+                <!-- Step 1: Hackathon Details -->
+                <div id="step-1" class="step fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Hackathon Details</h2>
+                    <p class="text-gray-600 mb-6">Tell us about the event you participated in.</p>
+                    
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="hackathon-name" class="block text-sm font-medium text-gray-700">Hackathon Name</label>
+                            <input type="text" id="hackathon-name" name="hackathon-name" placeholder="e.g., Code for a Cause, Tech Sprint 2024" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                        <div>
+                            <label for="team-name" class="block text-sm font-medium text-gray-700">Team Name</label>
+                            <input type="text" id="team-name" name="team-name" placeholder="e.g., The Code Breakers" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                        <div>
+                            <label for="hackathon-date" class="block text-sm font-medium text-gray-700">Date of Hackathon</label>
+                            <input type="date" id="hackathon-date" name="hackathon-date" placeholder="dd/mm/yyyy" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                        <div>
+                            <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                            <input type="text" id="location" name="location" placeholder="e.g., Online, San Francisco" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Project Details -->
+                <div id="step-2" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Project Details</h2>
+                    <p class="text-gray-600 mb-6">What did you build?</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="project-title" class="block text-sm font-medium text-gray-700">Project Title</label>
+                            <input type="text" id="project-title" name="project-title" placeholder="e.g., Secure Wallet App" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                        <div>
+                            <label for="project-category" class="block text-sm font-medium text-gray-700">Project Category</label>
+                            <select id="project-category" name="project-category" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                                <option value="">Select a category</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Mobile App">Mobile App</option>
+                                <option value="AI/Machine Learning">AI/Machine Learning</option>
+                                <option value="Blockchain">Blockchain</option>
+                                <option value="Game Development">Game Development</option>
+                                <option value="Data Science">Data Science</option>
+                                <option value="Cybersecurity">Cybersecurity</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="project-description" class="block text-sm font-medium text-gray-700">Project Description</label>
+                            <textarea id="project-description" name="project-description" rows="4" placeholder="Briefly describe what your project does." class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Technologies Used -->
+                <div id="step-3" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Technologies Used</h2>
+                    <p class="text-gray-600 mb-6">What tech stack did you use?</p>
+                    
+                    <div class="space-y-4">
+                        <label class="flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                            <input type="checkbox" name="tech-stack" value="React" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                            <span class="ml-4 text-gray-800 font-medium">React</span>
+                        </label>
+                        <label class="flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                            <input type="checkbox" name="tech-stack" value="Python/Django" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                            <span class="ml-4 text-gray-800 font-medium">Python/Django</span>
+                        </label>
+                        <label class="flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                            <input type="checkbox" name="tech-stack" value="Node.js" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                            <span class="ml-4 text-gray-800 font-medium">Node.js</span>
+                        </label>
+                        <label class="flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                            <input type="checkbox" name="tech-stack" value="Firebase" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                            <span class="ml-4 text-gray-800 font-medium">Firebase</span>
+                        </label>
+                        <div>
+                            <label for="other-tech" class="block text-sm font-medium text-gray-700 mt-2">Other Technologies</label>
+                            <input type="text" id="other-tech" name="other-tech" placeholder="e.g., Docker, AWS, Three.js" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Experience & Challenges -->
+                <div id="step-4" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Experience & Challenges</h2>
+                    <p class="text-gray-600 mb-6">Tell us about your journey.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="best-part" class="block text-sm font-medium text-gray-700">Best Part of the Hackathon</label>
+                            <textarea id="best-part" name="best-part" rows="4" placeholder="What did you enjoy the most?" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50"></textarea>
+                        </div>
+                        <div>
+                            <label for="challenges" class="block text-sm font-medium text-gray-700">Challenges Faced</label>
+                            <textarea id="challenges" name="challenges" rows="4" placeholder="Describe any technical or team challenges." class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Tips & Advice -->
+                <div id="step-5" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Tips & Advice</h2>
+                    <p class="text-gray-600 mb-6">Share some advice for future participants.</p>
+                    <div class="space-y-6">
+                        <div>
+                            <label for="tips" class="block text-sm font-medium text-gray-700">Tips for other hackers</label>
+                            <textarea id="tips" name="tips" rows="4" placeholder="e.g., 'Start with a clear plan,' or 'Focus on a Minimum Viable Product.'" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6: Review & Submit -->
+                <div id="step-6" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Review & Submit</h2>
+                    <p class="text-gray-600 mb-6">Please review your information before submitting.</p>
+                    
+                    <div id="review-content" class="bg-gray-50 p-6 rounded-xl space-y-4">
+                        <!-- Review data will be dynamically injected here by script.js -->
+                    </div>
+                </div>
+            </form>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                <button id="prev-btn" class="flex items-center text-blue-600 font-semibold py-2 px-4 rounded-xl hover:bg-blue-50 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                </button>
+                <button id="next-btn" class="flex items-center bg-blue-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:bg-blue-700 transition-colors duration-200">
+                    Next Step
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Bottom Step Indicator -->
+            <div id="step-nav" class="flex justify-around items-center mt-8 pt-6 border-t border-gray-200">
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">1</div>
+                    <span class="text-xs mt-2 text-blue-600 font-medium">Details</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">2</div>
+                    <span class="text-xs mt-2 text-gray-500">Project</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">3</div>
+                    <span class="text-xs mt-2 text-gray-500">Tech</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">4</div>
+                    <span class="text-xs mt-2 text-gray-500">Experience</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">5</div>
+                    <span class="text-xs mt-2 text-gray-500">Tips</span>
+                </div>
+                 <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">6</div>
+                    <span class="text-xs mt-2 text-gray-500">Review</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for form logic -->
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Experience</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icons from Heroicons -->
+    <script src="https://cdn.jsdelivr.net/npm/@heroicons/react@1.0.0/dist/heroicons.min.js"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main Form Container -->
+    <div class="bg-white rounded-3xl shadow-xl w-full max-w-2xl overflow-hidden no-scrollbar">
+        <div class="p-8">
+            <!-- Header and Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-3xl font-bold text-gray-800">Share Experience</h1>
+                    <span id="step-info" class="text-gray-500 font-medium">Step 1 of 6</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-in-out" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Multi-step Form Content -->
+            <form id="multi-step-form" class="space-y-6">
+
+                <!-- Step 1: Company Information -->
+                <div id="step-1" class="step fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Company Information</h2>
+                    <p class="text-gray-600 mb-6">Tell us about your interview experience</p>
+                    
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="company-name" class="block text-sm font-medium text-gray-700">Company Name</label>
+                            <input type="text" id="company-name" name="company-name" placeholder="Search company" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                        <div>
+                            <label for="role" class="block text-sm font-medium text-gray-700">Role Applied For</label>
+                            <input type="text" id="role" name="role" placeholder="e.g., Software Engineer, Data Analyst" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Position type</label>
+                            <div class="mt-1 flex space-x-4">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="position-type" value="internship" class="form-radio text-blue-600">
+                                    <span class="ml-2">Internship</span>
+                                </label>
+                                <!-- <label class="inline-flex items-center">
+                                    <input type="radio" name="position-type" value="full-time" class="form-radio text-blue-600">
+                                    <span class="ml-2">Full Time</span>
+                                </label> -->
+                            </div>
+                        </div>
+                        <div>
+                            <label for="interview-date" class="block text-sm font-medium text-gray-700">Interview Date</label>
+                            <input type="date" id="interview-date" name="interview-date" placeholder="dd/mm/yyyy" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                        <div>
+                            <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                            <input type="text" id="location" name="location" placeholder="e.g., Bangalore" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Selection Rounds -->
+                <div id="step-2" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Selection Rounds</h2>
+                    <p class="text-gray-600 mb-6">What rounds did you go through?</p>
+                    
+                    <div class="space-y-4">
+                        <label class="flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                            <input type="checkbox" name="round" value="Aptitude Test" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                            <span class="ml-4 text-gray-800 font-medium">Aptitude Test</span>
+                            <span class="ml-auto text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </label>
+                        <label class="flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                            <input type="checkbox" name="round" value="Technical Round" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                            <span class="ml-4 text-gray-800 font-medium">Technical Round</span>
+                            <span class="ml-auto text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </label>
+                        <label class="flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                            <input type="checkbox" name="round" value="HR Round" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                            <span class="ml-4 text-gray-800 font-medium">HR Round</span>
+                            <span class="ml-auto text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 3: Questions Asked -->
+                <div id="step-3" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Questions Asked</h2>
+                    <p class="text-gray-600 mb-6">What rounds did you go through?</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="technical-questions" class="block text-sm font-medium text-gray-700">Technical Questions</label>
+                            <textarea id="technical-questions" name="technical-questions" rows="4" placeholder="Describe coding questions, algorithms, etc." class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50"></textarea>
+                        </div>
+                        <div>
+                            <label for="hr-questions" class="block text-sm font-medium text-gray-700">HR Questions</label>
+                            <textarea id="hr-questions" name="hr-questions" rows="4" placeholder="Tell me about yourself, strengths, etc." class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Tips -->
+                <div id="step-4" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Tips</h2>
+                    <p class="text-gray-600 mb-6">Share some tips to the student</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="tips" class="block text-sm font-medium text-gray-700">Tips</label>
+                            <textarea id="tips" name="tips" rows="4" placeholder="Share the tips" class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 bg-gray-50"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Upload -->
+                <div id="step-5" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Upload</h2>
+                    <p class="text-gray-600 mb-6">Share some files</p>
+                    <div class="space-y-6">
+                        <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
+                            <p class="text-gray-500">Drag and drop your files here, or <span class="text-blue-600 cursor-pointer">browse</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6: Review -->
+                <div id="step-6" class="step hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Review & Submit</h2>
+                    <p class="text-gray-600 mb-6">Please review your information before submitting.</p>
+                    
+                    <div id="review-content" class="bg-gray-50 p-6 rounded-xl space-y-4">
+                        <!-- Review data will be dynamically injected here by script.js -->
+                    </div>
+                </div>
+            </form>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                <button id="prev-btn" class="flex items-center text-blue-600 font-semibold py-2 px-4 rounded-xl hover:bg-blue-50 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                </button>
+                <button id="next-btn" class="flex items-center bg-blue-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:bg-blue-700 transition-colors duration-200">
+                    Next Step
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Bottom Step Indicator -->
+            <div id="step-nav" class="flex justify-around items-center mt-8 pt-6 border-t border-gray-200">
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">1</div>
+                    <span class="text-xs mt-2 text-blue-600 font-medium">Company</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">2</div>
+                    <span class="text-xs mt-2 text-gray-500">Rounds</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">3</div>
+                    <span class="text-xs mt-2 text-gray-500">Questions</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">4</div>
+                    <span class="text-xs mt-2 text-gray-500">Tips</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">5</div>
+                    <span class="text-xs mt-2 text-gray-500">Upload</span>
+                </div>
+                 <div class="flex-1 flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold text-sm">6</div>
+                    <span class="text-xs mt-2 text-gray-500">Review</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for form logic -->
+    <script src="script.js"></script>
+
+</body>
+</html>

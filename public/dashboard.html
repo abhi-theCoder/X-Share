@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4c51bf, #6b46c1);
+        }
+        .redeem-btn {
+            transition: all 0.3s ease;
+        }
+        .redeem-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px -5px rgba(76, 81, 191, 0.5);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 lg:p-12">
+
+    <!-- Main Dashboard Container -->
+    <div class="max-w-4xl mx-auto space-y-8">
+
+        <!-- Header -->
+        <header class="flex items-center justify-between py-4">
+            <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-600 hover:text-gray-800 transition-colors">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 8a6 6 0 0 1 12 0c0 7-3 9-3 9H6s-3-2-3-9"></path>
+                        <path d="M10.33 21a1.94 1.94 0 0 0 3.34 0"></path>
+                    </svg>
+                </button>
+                <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-lg font-semibold text-gray-500">
+                    S
+                </div>
+            </div>
+        </header>
+
+        <!-- Quick Actions Section -->
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-700">Quick Actions</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- Changed to a link that goes to the share experience page -->
+                <a href="../experience/share-experience.html" class="card p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4 text-white">
+                        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                            <polyline points="16 6 12 2 8 6"></polyline>
+                            <line x1="12" x2="12" y1="2" y2="15"></line>
+                        </svg>
+                    </div>
+                    <span class="font-medium text-gray-700">Share Experience</span>
+                </a>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4 text-white">
+                        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                        </svg>
+                    </div>
+                    <span class="font-medium text-gray-700">Browse</span>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4 text-white">
+                        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9.53a5 5 0 0 1 7.28 2.52M12 16v1"></path>
+                        </svg>
+                    </div>
+                    <span class="font-medium text-gray-700">Ask a Question</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- User Coins & Redeem Section -->
+        <div class="card gradient-bg text-white p-8 space-y-4">
+            <div class="flex items-center space-x-4">
+                <h3 class="text-2xl font-semibold">My Coins</h3>
+                <svg class="w-8 h-8 text-yellow-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12V7.76l-3-3L12.24 3H7.76l-3 3L3 12.24V16a2 2 0 0 0 2 2h4"></path>
+                    <path d="M16 18a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2z"></path>
+                    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+                </svg>
+            </div>
+            <div class="flex items-end justify-between">
+                <p class="text-6xl font-extrabold" id="coinCount">1,250</p>
+                <!-- Updated the redeem link to go to the reward page -->
+                <a href="../reward/index.html" class="redeem-btn px-6 py-3 bg-white text-purple-600 font-semibold rounded-full shadow-lg">
+                    Redeem
+                </a>
+            </div>
+            <p class="text-sm text-gray-200 mt-2">Earn more by sharing experiences and helping others.</p>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-700">Leaderboard</h2>
+            <div class="space-y-4">
+                <div class="card p-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-xl font-bold text-gray-500">1</span>
+                        <div class="w-10 h-10 rounded-full bg-purple-400"></div>
+                        <span class="font-medium">Jasmin Godlin</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-yellow-500 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 10a6 6 0 0 0-6 6v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a6 6 0 0 0-6-6z"></path>
+                            <path d="M12 10V3a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v7"></path>
+                            <path d="M12 10V3a2 2 0 0 0 2-2h2a2 2 0 0 0 2 2v7"></path>
+                        </svg>
+                        <span class="font-bold text-gray-800">1250</span>
+                    </div>
+                </div>
+                <div class="card p-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-xl font-bold text-gray-500">2</span>
+                        <div class="w-10 h-10 rounded-full bg-blue-400"></div>
+                        <span class="font-medium">Alex</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-gray-400 fill-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 10a6 6 0 0 0-6 6v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a6 6 0 0 0-6-6z"></path>
+                            <path d="M12 10V3a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v7"></path>
+                            <path d="M12 10V3a2 2 0 0 0 2-2h2a2 2 0 0 0 2 2v7"></path>
+                        </svg>
+                        <span class="font-bold text-gray-800">950</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Section -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-semibold text-gray-700">Resources</h2>
+                <a href="#" class="text-sm font-medium text-blue-600 hover:underline">See All</a>
+            </div>
+            <div class="space-y-4">
+                <div class="card p-4 flex items-center justify-between">
+                    <div class="space-y-1">
+                        <span class="text-lg font-medium">Tutorial</span>
+                        <p class="text-gray-500 text-sm">UX Best Practices</p>
+                    </div>
+                    <svg class="w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <path d="M10 9l-4 4l4 4"></path>
+                        <path d="M14 9l4 4l-4 4"></path>
+                    </svg>
+                </div>
+                <div class="card p-4 flex items-center justify-between">
+                    <div class="space-y-1">
+                        <span class="text-lg font-medium">Study Guide</span>
+                        <p class="text-gray-500 text-sm">Mobile Design Patterns</p>
+                    </div>
+                    <svg class="w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <path d="M10 9l-4 4l4 4"></path>
+                        <path d="M14 9l4 4l-4 4"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-semibold text-gray-700">Recent Activity</h2>
+                <a href="#" class="text-sm font-medium text-blue-600 hover:underline">See All</a>
+            </div>
+            <div class="space-y-4">
+                <!-- Activity Card 1 -->
+                <div class="card p-4">
+                    <div class="flex items-start space-x-4 mb-2">
+                        <div class="w-10 h-10 rounded-full bg-pink-400"></div>
+                        <div class="flex-1">
+                            <span class="font-medium">Emma</span>
+                            <span class="text-gray-500"> shared an experience</span>
+                            <p class="text-gray-500 text-sm">2h ago</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">Just completed my first mobile app design project!</p>
+                </div>
+                
+                <!-- Activity Card 2 -->
+                <div class="card p-4">
+                    <div class="flex items-start space-x-4 mb-2">
+                        <div class="w-10 h-10 rounded-full bg-gray-400"></div>
+                        <div class="flex-1">
+                            <span class="font-medium">David</span>
+                            <span class="text-gray-500"> asked a question</span>
+                            <p class="text-gray-500 text-sm">5h ago</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">What's the best approach for mobile navigation patterns?</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

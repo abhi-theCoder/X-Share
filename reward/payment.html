@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Purchase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="payment-page">
+    <div class="container">
+        <header class="page-header" style="margin-bottom: 2rem;">
+            <a href="redeem.html" target="_blank" style="text-decoration: none; color: inherit;"><i class="fas fa-arrow-left"></i></a>
+            <h2 style="margin: 0;">Complete Your Purchase</h2>
+        </header>
+
+        <div class="payment-container">
+            <section class="payment-card">
+                <h2>Scan QR Code</h2>
+                <div class="qr-section">
+                    <div class="qr-code-placeholder">
+                        <img src="QR.png" alt="QR Code" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <p style="color: var(--text-secondary);">Scan this QR code with any UPI app</p>
+                </div>
+                
+                <h2 style="margin-top: 2rem;">Enter UPI ID</h2>
+                <div class="upi-input-group">
+                    <input type="text" placeholder="example@paytm">
+                    <button class="btn-primary">Verify</button>
+                </div>
+                
+                <h2 style="margin-top: 2rem;">Apply Coin Discount</h2>
+                <div class="upi-input-group">
+                    <input type="number" id="coin-input" placeholder="Enter coins to apply" value="0">
+                    <button class="btn-primary" id="apply-button">Apply</button>
+                </div>
+                <p id="coin-info" style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Min. 500 coins can be applied.</p>
+            </section>
+
+            <section class="summary-card">
+                <h2>Summary</h2>
+                <div class="summary-item">
+                    <span>Item:</span>
+                    <span id="item-name"></span>
+                </div>
+                <div class="summary-item">
+                    <span>Total Amount:</span>
+                    <span id="total-amount-display"></span>
+                </div>
+                <div class="summary-item">
+                    <span>Coin Discount:</span>
+                    <span id="discount-amount" class="coin-negative"></span>
+                </div>
+                <div class="summary-item final">
+                    <span>Final Amount Payable:</span>
+                    <span id="final-amount-display"></span>
+                </div>
+                <button class="btn-primary" id="pay-button"></button>
+                <p class="secure-payment">
+                    <i class="fas fa-lock"></i>
+                    Secure payment powered by UPI
+                </p>
+            </section>
+        </div>
+        
+        <section class="section-card" style="margin-top: 2rem; padding: 1.5rem; text-align: center;">
+            <h3 style="color: var(--dark-purple);">Your Balance After Purchase</h3>
+            <p id="remaining-coins-display" style="font-size: 2rem; font-weight: 700; color: var(--primary-purple);">
+                </p>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Share - Share Experiences, Get Guidance</title>
+    <meta name="description" content="Platform for college students to share internship, placement & event experiences. Get guidance from seniors and build your career path.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-content">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i data-lucide="graduation-cap"></i>
+                    </div>
+                    <span class="logo-text">X Share</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="nav-links desktop">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="../guidance/index.html" class="nav-link">Find Guidance</a>
+                    <a href="../experience/share-experience.html" class="nav-link">Share Experience</a>
+                    <a href="../reward/index.html" class="nav-link">Rewards</a>
+                </div>
+
+                <!-- Desktop Auth Buttons -->
+                <div class="auth-buttons desktop">
+                    <a href="login.html" class="btn btn-ghost">Login</a>
+                    <a href="login.html?signup=true" class="btn btn-hero">Sign Up</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn mobile" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" class="menu-icon"></i>
+                    <i data-lucide="x" class="close-icon"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu mobile">
+                <div class="mobile-nav-links">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="../guidance/index.html" class="nav-link">Find Guidance</a>
+                    <a href="../experience/share-experience.html" class="nav-link">Share Experience</a>
+                    <a href="../reward/index.html" class="nav-link">Rewards</a>
+                </div>
+                <div class="mobile-auth-buttons">
+                    <a href="login.html" class="btn btn-ghost">Login</a>
+                    <a href="login.html?signup=true" class="btn btn-hero">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background"></div>
+        
+        <div class="hero-content">
+            <div class="hero-grid">
+                <!-- Text Content -->
+                <div class="hero-text">
+                    <div class="hero-heading">
+                        <h1>
+                            Share your <span class="gradient-text">journey</span><br>
+                            Inspire others
+                        </h1>
+                        <p class="hero-description">
+                            Connect with fellow students to share internship, placement, and event experiences. 
+                            Get guidance from seniors and build your career path together.
+                        </p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="hero-buttons">
+                        <a href="../experience/share-experience.html" class="btn btn-hero">
+                            <i data-lucide="share"></i>
+                            Share Experience
+                            <i data-lucide="arrow-right" class="arrow-icon"></i>
+                        </a>
+                        <a href="../guidance/index.html" class="btn btn-hero-outline">
+                            <i data-lucide="users"></i>
+                            Find Guidance
+                            <i data-lucide="arrow-right" class="arrow-icon"></i>
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">1000+</div>
+                            <div class="stat-label">Experiences Shared</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Students Helped</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Companies Featured</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="hero-image">
+                    <div class="hero-image-container">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&h=600" 
+                             alt="Students sharing experiences and knowledge" 
+                             class="hero-img">
+                    </div>
+                    <div class="hero-decoration hero-decoration-1"></div>
+                    <div class="hero-decoration hero-decoration-2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Share Your Experience</h2>
+                <p>Choose a category to share your journey and help fellow students</p>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card category-internship" onclick="location.href='../experience/share-experience.html?category=internship'">
+                    <div class="category-icon">
+                        <i data-lucide="briefcase"></i>
+                    </div>
+                    <h3>Internships</h3>
+                    <p>Share your internship experience, application process, and tips for success</p>
+                    <div class="category-arrow">
+                        <i data-lucide="arrow-right"></i>
+                    </div>
+                </div>
+
+                <div class="category-card category-placement" onclick="location.href='../experience/share-experience.html?category=placement'">
+                    <div class="category-icon">
+                        <i data-lucide="building"></i>
+                    </div>
+                    <h3>Placements</h3>
+                    <p>Help others with placement preparation, interview rounds, and company insights</p>
+                    <div class="category-arrow">
+                        <i data-lucide="arrow-right"></i>
+                    </div>
+                </div>
+
+                <div class="category-card category-hackathon" onclick="location.href='../experience/share-experience.html?category=hackathon'">
+                    <div class="category-icon">
+                        <i data-lucide="code"></i>
+                    </div>
+                    <h3>Hackathons</h3>
+                    <p>Share your hackathon journey, project ideas, and competition strategies</p>
+                    <div class="category-arrow">
+                        <i data-lucide="arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- <div class="category-card category-event" onclick="location.href='../experience/share-experience.html?category=event'">
+                    <div class="category-icon">
+                        <i data-lucide="calendar"></i>
+                    </div>
+                    <h3>Events</h3>
+                    <p>Tell others about workshops, conferences, and networking events you attended</p>
+                    <div class="category-arrow">
+                        <i data-lucide="arrow-right"></i>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>A simple and transparent process to help you find the right path</p>
+            </div>
+            <div class="how-it-works-grid">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i data-lucide="user-plus"></i>
+                    </div>
+                    <h3>Sign Up</h3>
+                    <p>Create your free account to start exploring experiences and connecting with seniors.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i data-lucide="search"></i>
+                    </div>
+                    <h3>Find Experiences</h3>
+                    <p>Browse through hundreds of verified experiences shared by your peers.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i data-lucide="message-square-more"></i>
+                    </div>
+                    <h3>Get Guidance</h3>
+                    <p>Connect with authors to ask questions and get personalized advice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Experiences Section -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Experiences</h2>
+                <p>Check out some of the most helpful and recent experiences</p>
+            </div>
+            <div class="categories-grid">
+                <!-- Featured Experience Card 1 -->
+                <div class="experience-card-home">
+                    <div class="experience-header">
+                        <div class="icon">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <h4>Software Engineer Intern at Google</h4>
+                    </div>
+                    <div class="experience-tags">
+                        <span class="tag">Internship</span>
+                        <span class="tag">Summer 2024</span>
+                        <span class="tag">Hyderabad</span>
+                    </div>
+                    <div class="experience-content">
+                        <p>
+                            The internship was an incredible learning experience. I worked on a challenging project
+                            involving machine learning models for search ranking. The mentorship was top-notch,
+                            and the work-life balance was surprisingly good. Highly recommend this for anyone
+                            interested in large-scale systems.
+                        </p>
+                    </div>
+                    <div class="experience-author">- Rahul S., CSE '25</div>
+                </div>
+
+                <!-- Featured Experience Card 2 -->
+                <div class="experience-card-home">
+                    <div class="experience-header">
+                        <div class="icon">
+                            <i data-lucide="building"></i>
+                        </div>
+                        <h4>Data Scientist at Amazon</h4>
+                    </div>
+                    <div class="experience-tags">
+                        <span class="tag">Placement</span>
+                        <span class="tag">2023 Batch</span>
+                        <span class="tag">Bangalore</span>
+                    </div>
+                    <div class="experience-content">
+                        <p>
+                            My placement journey at Amazon was intense but rewarding. The interview process
+                            included several technical rounds and a dedicated behavioral round. They focus heavily
+                            on leadership principles. Be prepared with strong examples for each one!
+                        </p>
+                    </div>
+                    <div class="experience-author">- Priya M., ECE '23</div>
+                </div>
+
+                <!-- Featured Experience Card 3 -->
+                <div class="experience-card-home">
+                    <div class="experience-header">
+                        <div class="icon">
+                            <i data-lucide="code"></i>
+                        </div>
+                        <h4>Winner at EthDenver Hackathon</h4>
+                    </div>
+                    <div class="experience-tags">
+                        <span class="tag">Hackathon</span>
+                        <span class="tag">Web3</span>
+                        <span class="tag">2024</span>
+                    </div>
+                    <div class="experience-content">
+                        <p>
+                            My team and I built a decentralized identity management system. The energy at the hackathon
+                            was amazing! We had to pivot our idea halfway through, which taught us a lot about
+                            adaptability. A great experience for anyone wanting to get into blockchain.
+                        </p>
+                    </div>
+                    <div class="experience-author">- Arjun P., IT '24</div>
+                </div>
+            </div>
+            
+            <div class="view-more-btn-container">
+                <a href="../guidance/index.html" class="btn btn-hero-outline">
+                    <i data-lucide="eye"></i>
+                    View More Experiences
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Join the Community CTA -->
+    <section>
+        <div class="container">
+            <div class="cta-section">
+                <div class="cta-background-decoration"></div>
+                <div class="cta-content">
+                    <h2>Ready to share your story or find your path?</h2>
+                    <p>Join thousands of students who are building their careers together. It's free and easy to get started.</p>
+                    <a href="login.html?signup=true" class="btn btn-hero">
+                        <i data-lucide="user-plus"></i>
+                        Get Started - It's Free!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Logo & Description -->
+                <div class="footer-column">
+                    <a href="#" class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i data-lucide="graduation-cap"></i>
+                        </div>
+                        <span class="footer-logo-text">X Share</span>
+                    </a>
+                    <p class="mt-2 text-sm text-gray-400">
+                        The ultimate platform for college students to share and discover real-world experiences.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                        <a href="#" class="social-icon" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="social-icon" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="../guidance/index.html">Find Guidance</a></li>
+                        <li><a href="../experience/share-experience.html">Share Experience</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Resources -->
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <p>support@xshare.com</p>
+                    <p>+91 98765 43210</p>
+                    <p>123 College Ave, New Delhi, India</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                &copy; 2024 X Share. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src ="script.js"></script>
+    
+</body>
+</html>

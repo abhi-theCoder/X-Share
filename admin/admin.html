@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - X Share</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* A soft, off-white background */
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Define custom colors and styles based on the provided image */
+        .header-bg {
+            background-color: #4338CA; /* A deep indigo */
+        }
+        .footer-bg {
+            background-color: #0F172A; /* A very dark slate color */
+        }
+        .text-xshare-purple {
+            color: #7C3AED; /* A vibrant purple for accents */
+        }
+        .btn-primary {
+            background-color: #7C3AED;
+            color: #ffffff;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #6D28D9;
+        }
+
+        /* --- Admin UI Custom Styles --- */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 2rem;
+            min-height: 70vh;
+        }
+
+        .submissions-list-pane, .detail-pane, .dashboard-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .submission-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            border-radius: 0.75rem;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+        }
+        .submission-item:hover {
+            background-color: #f1f5f9; /* Tailwind: bg-slate-100 */
+        }
+        .submission-item.selected {
+            background-color: #eef2ff; /* Tailwind: bg-indigo-50 */
+            border-color: #4f46e5; /* Tailwind: border-indigo-600 */
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            font-weight: 600;
+            color: #334155; /* Tailwind: text-slate-700 */
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            border-radius: 0.5rem;
+            border: 1px solid #cbd5e1; /* Tailwind: border-slate-300 */
+            padding: 0.75rem;
+            background-color: #f8fafc; /* Tailwind: bg-slate-50 */
+            transition: all 0.2s ease-in-out;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #64748b; /* Tailwind: border-slate-500 */
+            box-shadow: 0 0 0 2px rgba(100, 116, 139, 0.2); /* Tailwind: ring-2 ring-slate-500 */
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            white-space: nowrap;
+        }
+
+        .btn-approve {
+            background-color: #22c55e; /* Tailwind: bg-green-500 */
+            color: #ffffff;
+        }
+        .btn-approve:hover {
+            background-color: #16a34a; /* Tailwind: bg-green-600 */
+        }
+
+        .btn-reject {
+            background-color: #ef4444; /* Tailwind: bg-red-500 */
+            color: #ffffff;
+        }
+        .btn-reject:hover {
+            background-color: #dc2626; /* Tailwind: bg-red-600 */
+        }
+
+        .btn-revert {
+            background-color: #f97316; /* Tailwind: bg-orange-500 */
+            color: #ffffff;
+        }
+        .btn-revert:hover {
+            background-color: #ea580c; /* Tailwind: bg-orange-600 */
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .status-badge.pending {
+            background: #fef3c7; /* Tailwind: bg-amber-100 */
+            color: #f59e0b; /* Tailwind: text-amber-500 */
+        }
+
+        .status-badge.approved {
+            background: #dcfce7; /* Tailwind: bg-green-100 */
+            color: #22c55e; /* Tailwind: text-green-500 */
+        }
+
+        .status-badge.rejected {
+            background: #fee2e2; /* Tailwind: bg-red-100 */
+            color: #ef4444; /* Tailwind: text-red-500 */
+        }
+
+        .tab-button.active {
+            background-color: #e2e8f0; /* Tailwind: bg-slate-200 */
+            border-color: #64748b; /* Tailwind: border-slate-500 */
+            color: #1e293b; /* Tailwind: text-slate-800 */
+        }
+        .nav-button.active {
+            border-bottom: 2px solid #ffffff;
+            font-weight: 600;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-slate-900 mb-2">Admin Dashboard</h1>
+            <p class="text-lg text-slate-600">Review and manage shared experiences</p>
+        </header>
+
+        <!-- Admin Layout Grid -->
+        <section class="admin-layout">
+
+            <!-- Submissions List and Filters (Left Pane) -->
+            <div class="submissions-list-pane">
+                <!-- Status Filter -->
+                <div class="mb-6 border-b border-slate-200 pb-4">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Filter by Status</h2>
+                    <div class="flex space-x-2">
+                        <button id="pending-tab" class="tab-button px-4 py-2 font-semibold text-sm rounded-lg border border-transparent transition-colors duration-200 active">Pending</button>
+                        <button id="approved-tab" class="tab-button px-4 py-2 font-semibold text-sm rounded-lg border border-transparent transition-colors duration-200">Approved</button>
+                        <button id="rejected-tab" class="tab-button px-4 py-2 font-semibold text-sm rounded-lg border border-transparent transition-colors duration-200">Rejected</button>
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Submission Type</h2>
+                    <div class="flex space-x-4">
+                        <button id="interview-btn" class="text-blue-600 font-semibold py-2 px-4 rounded-xl bg-blue-100 transition-colors duration-200">Interview Experiences</button>
+                        <button id="hackathon-btn" class="text-slate-600 font-semibold py-2 px-4 rounded-xl hover:bg-slate-100 transition-colors duration-200">Hackathon Experiences</button>
+                    </div>
+                </div>
+
+                <div id="submissionsListContainer" class="space-y-2">
+                    <!-- Submission items will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Detailed View and Actions (Right Pane) -->
+            <div class="detail-pane" id="detailPane">
+                <div id="noSelectionMessage" class="text-center text-slate-500 py-12">
+                    <i data-lucide="info" class="w-12 h-12 mx-auto mb-4"></i>
+                    <p>Select a submission from the left to view details.</p>
+                </div>
+                <!-- Dynamic content for selected item -->
+                <div id="submissionDetails" class="hidden">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">Submission Details</h2>
+                        <span id="submissionStatusBadge" class="status-badge"></span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Experience Details Form -->
+                        <div class="col-span-1 md:col-span-2">
+                            <h3 class="text-xl font-bold text-slate-800 mb-4">Submission Content</h3>
+                            <div class="form-group">
+                                <label for="companyName">Company Name / Hackathon Name</label>
+                                <input type="text" id="companyName" class="px-4 py-2 border rounded-xl" />
+                            </div>
+                            <div class="form-group">
+                                <label for="jobRole">Job Role / Project Title</label>
+                                <input type="text" id="jobRole" class="px-4 py-2 border rounded-xl" />
+                            </div>
+                            <!-- This will be hidden for Hackathon Experiences -->
+                            <div class="form-group interview-field">
+                                <label for="experienceRating">Experience Rating</label>
+                                <select id="experienceRating" class="px-4 py-2 border rounded-xl">
+                                    <option value="5">5/5 - Excellent</option>
+                                    <option value="4">4/5 - Very Good</option>
+                                    <option value="3">3/5 - Good</option>
+                                    <option value="2">2/5 - Fair</option>
+                                    <option value="1">1/5 - Poor</option>
+                                </select>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4">Round-by-round Breakdown</h3>
+                            <div class="form-group">
+                                <label for="experienceBreakdown">Technical Questions / Challenges Faced</label>
+                                <textarea id="experienceBreakdown" rows="6" class="px-4 py-2 border rounded-xl"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="tipsBreakdown">Tips / Best Part of the Hackathon</label>
+                                <textarea id="tipsBreakdown" rows="6" class="px-4 py-2 border rounded-xl"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div id="actionButtons" class="flex space-x-4 mt-6">
+                        <!-- Buttons will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        (function() {
+            let currentCategory = 'interview'; // 'interview' or 'hackathon'
+            let currentStatus = 'pending';  // 'pending', 'approved', or 'rejected'
+            let selectedSubmissionId = null;
+
+            // Function to handle fetching and parsing data from localStorage
+            function getExperiences() {
+                // Initialize all three status lists for both categories
+                const interviewExperiences = {
+                    pending: JSON.parse(localStorage.getItem('pendingExperiences')) || [],
+                    approved: JSON.parse(localStorage.getItem('approvedExperiences')) || [],
+                    rejected: JSON.parse(localStorage.getItem('rejectedExperiences')) || []
+                };
+                
+                // Hackathon submissions are stored in a single array and filtered by status
+                const hackathonSubmissions = JSON.parse(localStorage.getItem('hackathonSubmissions')) || [];
+                const hackathonExperiences = {
+                    pending: hackathonSubmissions.filter(exp => exp.status === 'pending'),
+                    approved: hackathonSubmissions.filter(exp => exp.status === 'approved'),
+                    rejected: hackathonSubmissions.filter(exp => exp.status === 'rejected')
+                };
+
+                return {
+                    interview: interviewExperiences,
+                    hackathon: hackathonExperiences
+                };
+            }
+
+            // Function to save data back to localStorage
+            function saveExperiences() {
+                const { interview, hackathon } = getExperiences();
+                
+                // Save interview experiences
+                localStorage.setItem('pendingExperiences', JSON.stringify(interview.pending));
+                localStorage.setItem('approvedExperiences', JSON.stringify(interview.approved));
+                localStorage.setItem('rejectedExperiences', JSON.stringify(interview.rejected));
+                
+                // Save hackathon experiences (re-combine into a single array)
+                const allHackathonSubmissions = [...hackathon.pending, ...hackathon.approved, ...hackathon.rejected];
+                localStorage.setItem('hackathonSubmissions', JSON.stringify(allHackathonSubmissions));
+            }
+
+            // Function to render the list of submissions based on current category and status
+            function renderSubmissionsList() {
+                const experiences = getExperiences()[currentCategory][currentStatus];
+                const container = document.getElementById('submissionsListContainer');
+                container.innerHTML = '';
+                
+                if (experiences.length === 0) {
+                    container.innerHTML = `<div class="text-center text-slate-500 py-4">No ${currentStatus} submissions</div>`;
+                    document.getElementById('detailPane').classList.add('hidden');
+                    return;
+                }
+                
+                document.getElementById('detailPane').classList.remove('hidden');
+
+                experiences.forEach(exp => {
+                    const item = document.createElement('div');
+                    item.className = 'submission-item';
+                    item.dataset.id = exp.id;
+                    item.dataset.status = currentStatus;
+                    
+                    // Determine which fields to display based on category
+                    let primaryText, secondaryText;
+                    if (currentCategory === 'hackathon') {
+                        primaryText = exp.role || 'Unknown Project';
+                        secondaryText = `Team: ${exp.author || 'N/A'}`;
+                    } else {
+                        primaryText = exp.role || 'Unknown Role';
+                        secondaryText = `Company: ${exp.companyName || 'N/A'}`;
+                    }
+                    
+                    item.innerHTML = `
+                        <div>
+                            <span class="font-semibold text-slate-900">${primaryText}</span>
+                            <p class="text-slate-500 text-sm">${secondaryText}</p>
+                        </div>
+                        <span class="text-slate-400 text-sm">ID: ${exp.id}</span>
+                    `;
+                    container.appendChild(item);
+                });
+            }
+
+            // Function to display details of a selected experience
+            function displayExperienceDetails(experience) {
+                const detailsContainer = document.getElementById('submissionDetails');
+                const noSelectionMessage = document.getElementById('noSelectionMessage');
+                const interviewField = document.querySelector('.interview-field');
+
+                if (!experience) {
+                    detailsContainer.classList.add('hidden');
+                    noSelectionMessage.classList.remove('hidden');
+                    // Clear selected item class
+                    document.querySelectorAll('.submission-item.selected').forEach(el => el.classList.remove('selected'));
+                    return;
+                }
+
+                detailsContainer.classList.remove('hidden');
+                noSelectionMessage.classList.add('hidden');
+                selectedSubmissionId = experience.id;
+
+                // Toggle visibility of the interview-specific field
+                if (currentCategory === 'hackathon') {
+                    interviewField.style.display = 'none';
+                } else {
+                    interviewField.style.display = 'block';
+                }
+
+                // Update the status badge
+                const statusBadge = document.getElementById('submissionStatusBadge');
+                statusBadge.textContent = experience.status;
+                statusBadge.className = `status-badge ${experience.status}`;
+                
+                // Populate the form fields with the experience data
+                if (currentCategory === 'hackathon') {
+                    document.getElementById('companyName').value = experience.companyName || '';
+                    document.getElementById('jobRole').value = experience.role || '';
+                    document.getElementById('experienceBreakdown').value = experience.technicalQuestions || '';
+                    document.getElementById('tipsBreakdown').value = experience.tips || '';
+                } else {
+                    document.getElementById('companyName').value = experience['company-name'] || '';
+                    document.getElementById('jobRole').value = experience.role || '';
+                    document.getElementById('experienceRating').value = experience.experienceRating || '3';
+                    document.getElementById('experienceBreakdown').value = experience['technical-questions'] || '';
+                    document.getElementById('tipsBreakdown').value = experience.tips || experience['hr-questions'] || '';
+                }
+
+                // Render action buttons based on status
+                const actionButtonsContainer = document.getElementById('actionButtons');
+                actionButtonsContainer.innerHTML = ''; // Clear previous buttons
+
+                if (currentStatus === 'pending') {
+                    const approveBtn = createActionButton('approveBtn', 'check', 'Approve', 'btn-approve', () => approveSubmission(experience));
+                    const rejectBtn = createActionButton('rejectBtn', 'x', 'Reject', 'btn-reject', () => rejectSubmission(experience));
+                    actionButtonsContainer.appendChild(approveBtn);
+                    actionButtonsContainer.appendChild(rejectBtn);
+                } else if (currentStatus === 'approved') {
+                    const rejectBtn = createActionButton('rejectBtn', 'x', 'Reject', 'btn-reject', () => rejectSubmission(experience));
+                    actionButtonsContainer.appendChild(rejectBtn);
+                } else if (currentStatus === 'rejected') {
+                    const approveBtn = createActionButton('approveBtn', 'check', 'Approve', 'btn-approve', () => approveSubmission(experience));
+                    const revertBtn = createActionButton('revertBtn', 'rotate-ccw', 'Revert to Pending', 'btn-revert', () => revertToPending(experience));
+                    actionButtonsContainer.appendChild(approveBtn);
+                    actionButtonsContainer.appendChild(revertBtn);
+                }
+            }
+
+            // Utility function to create action buttons
+            function createActionButton(id, icon, text, className, onClick) {
+                const button = document.createElement('button');
+                button.id = id;
+                button.className = `btn flex items-center space-x-2 ${className}`;
+                button.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4"></i><span>${text}</span>`;
+                button.addEventListener('click', onClick);
+                // Re-create icons for the new button
+                lucide.createIcons();
+                return button;
+            }
+
+            // Function to move a submission to the 'approved' list
+            function approveSubmission(experience) {
+                const { [currentCategory]: expData } = getExperiences();
+                
+                // Move from source list (pending/rejected) to approved list
+                const sourceList = expData[currentStatus];
+                const destinationList = expData.approved;
+
+                const index = sourceList.findIndex(exp => exp.id === experience.id);
+                if (index !== -1) {
+                    const [movedItem] = sourceList.splice(index, 1);
+                    movedItem.status = 'approved';
+                    // Update the item with current form values before saving
+                    Object.assign(movedItem, getFormData());
+                    destinationList.push(movedItem);
+                    saveExperiences();
+                    showToast('Submission approved successfully!', 'success');
+                    updateUI();
+                }
+            }
+
+            // Function to move a submission to the 'rejected' list
+            function rejectSubmission(experience) {
+                const { [currentCategory]: expData } = getExperiences();
+
+                // Move from source list (pending/approved) to rejected list
+                const sourceList = expData[currentStatus];
+                const destinationList = expData.rejected;
+
+                const index = sourceList.findIndex(exp => exp.id === experience.id);
+                if (index !== -1) {
+                    const [movedItem] = sourceList.splice(index, 1);
+                    movedItem.status = 'rejected';
+                    // Update the item with current form values before saving
+                    Object.assign(movedItem, getFormData());
+                    destinationList.push(movedItem);
+                    saveExperiences();
+                    showToast('Submission rejected.', 'info');
+                    updateUI();
+                }
+            }
+
+            // Function to revert a rejected submission back to 'pending'
+            function revertToPending(experience) {
+                const { [currentCategory]: expData } = getExperiences();
+
+                const sourceList = expData.rejected;
+                const destinationList = expData.pending;
+
+                const index = sourceList.findIndex(exp => exp.id === experience.id);
+                if (index !== -1) {
+                    const [movedItem] = sourceList.splice(index, 1);
+                    movedItem.status = 'pending';
+                    // Update the item with current form values before saving
+                    Object.assign(movedItem, getFormData());
+                    destinationList.push(movedItem);
+                    saveExperiences();
+                    showToast('Submission reverted to pending.', 'info');
+                    updateUI();
+                }
+            }
+
+            // Helper function to get data from form fields
+            function getFormData() {
+                const formData = {};
+                if (currentCategory === 'hackathon') {
+                    formData.companyName = document.getElementById('companyName').value;
+                    formData.role = document.getElementById('jobRole').value;
+                    formData.technicalQuestions = document.getElementById('experienceBreakdown').value;
+                    formData.tips = document.getElementById('tipsBreakdown').value;
+                } else {
+                    formData['company-name'] = document.getElementById('companyName').value;
+                    formData.role = document.getElementById('jobRole').value;
+                    formData.experienceRating = document.getElementById('experienceRating').value;
+                    formData['technical-questions'] = document.getElementById('experienceBreakdown').value;
+                    formData.tips = document.getElementById('tipsBreakdown').value;
+                }
+                return formData;
+            }
+
+            // Central function to re-render the UI
+            function updateUI() {
+                renderSubmissionsList();
+                // Reset the detailed pane
+                displayExperienceDetails(null);
+            }
+
+            // Utility function for toast notifications
+            function showToast(message, type = 'success', duration = 3000) {
+                let toastContainer = document.querySelector('.toast-container');
+                if (!toastContainer) {
+                    toastContainer = document.createElement('div');
+                    toastContainer.className = 'fixed bottom-4 right-4 flex flex-col items-end space-y-2 z-[100] toast-container';
+                    document.body.appendChild(toastContainer);
+                }
+
+                const toast = document.createElement('div');
+                toast.className = `px-6 py-3 rounded-full text-white font-medium shadow-lg transition-transform duration-300 transform translate-y-full opacity-0`;
+                
+                if (type === 'success') {
+                    toast.classList.add('bg-green-500');
+                } else if (type === 'error') {
+                    toast.classList.add('bg-red-500');
+                } else if (type === 'info') {
+                    toast.classList.add('bg-blue-500');
+                }
+
+                toast.textContent = message;
+                toastContainer.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.classList.add('translate-y-0', 'opacity-100');
+                }, 100);
+
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-full', 'opacity-0');
+                    toast.addEventListener('transitionend', () => toast.remove());
+                }, duration);
+            }
+
+            // Event listener for the list items using event delegation
+            document.getElementById('submissionsListContainer').addEventListener('click', (e) => {
+                const item = e.target.closest('.submission-item');
+                if (!item) return;
+                
+                // Remove 'selected' class from all items
+                document.querySelectorAll('.submission-item').forEach(el => el.classList.remove('selected'));
+                // Add 'selected' class to the clicked item
+                item.classList.add('selected');
+
+                const id = parseInt(item.dataset.id);
+                const experiences = getExperiences()[currentCategory][currentStatus];
+                const selectedExperience = experiences.find(exp => exp.id === id);
+                
+                if (selectedExperience) {
+                    displayExperienceDetails(selectedExperience);
+                }
+            });
+
+            // Event listeners for category buttons (Interview/Hackathon)
+            document.getElementById('interview-btn').addEventListener('click', () => {
+                currentCategory = 'interview';
+                document.getElementById('interview-btn').classList.add('bg-blue-100', 'text-blue-600');
+                document.getElementById('interview-btn').classList.remove('hover:bg-slate-100', 'text-slate-600');
+                document.getElementById('hackathon-btn').classList.remove('bg-blue-100', 'text-blue-600');
+                document.getElementById('hackathon-btn').classList.add('hover:bg-slate-100', 'text-slate-600');
+                updateUI();
+            });
+
+            document.getElementById('hackathon-btn').addEventListener('click', () => {
+                currentCategory = 'hackathon';
+                document.getElementById('hackathon-btn').classList.add('bg-blue-100', 'text-blue-600');
+                document.getElementById('hackathon-btn').classList.remove('hover:bg-slate-100', 'text-slate-600');
+                document.getElementById('interview-btn').classList.remove('bg-blue-100', 'text-blue-600');
+                document.getElementById('interview-btn').classList.add('hover:bg-slate-100', 'text-slate-600');
+                updateUI();
+            });
+            
+            // Event listeners for status tabs (Pending/Approved/Rejected)
+            document.getElementById('pending-tab').addEventListener('click', () => {
+                currentStatus = 'pending';
+                updateTabStyles();
+                updateUI();
+            });
+
+            document.getElementById('approved-tab').addEventListener('click', () => {
+                currentStatus = 'approved';
+                updateTabStyles();
+                updateUI();
+            });
+
+            document.getElementById('rejected-tab').addEventListener('click', () => {
+                currentStatus = 'rejected';
+                updateTabStyles();
+                updateUI();
+            });
+
+            // Helper function to update tab button styles
+            function updateTabStyles() {
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.getElementById(`${currentStatus}-tab`).classList.add('active');
+            }
+
+            // Initial page load
+            document.addEventListener('DOMContentLoaded', () => {
+                lucide.createIcons();
+                updateUI();
+            });
+        })();
+    </script>
+</body>
+</html>

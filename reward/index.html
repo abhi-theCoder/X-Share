@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="text-center">
+            <h1 style="color: var(--dark-blue);">Rewards Dashboard</h1>
+            <p style="color: var(--text-secondary);">Earn and redeem coins for amazing rewards</p>
+        </header>
+
+        <section class="section-card text-center" style="margin: 2rem 0;">
+            <p class="coin-balance">1,250</p>
+            <p class="coin-inr">₹1,250</p>
+            <a href="login.html" target="_blank" class="btn-primary" style="margin-top: 2rem;">
+                Redeem Coins <i class="fas fa-arrow-right icon" style="margin-left: 8px;"></i>
+            </a>
+        </section>
+
+        <main class="flex-container">
+            <section class="section-card">
+                <h2>How to Earn Coins</h2>
+                <div class="earn-item">
+                    <div class="left-icon">
+                        <i class="fas fa-share-alt icon"></i>
+                        Share an Experience
+                    </div>
+                    <span class="points">+50</span>
+                </div>
+                <div class="earn-item">
+                    <div class="left-icon">
+                        <i class="fas fa-question-circle icon"></i>
+                        Answer a Question
+                    </div>
+                    <span class="points">+25</span>
+                </div>
+                <div class="earn-item">
+                    <div class="left-icon">
+                        <i class="fas fa-user-plus icon"></i>
+                        Refer a Friend
+                    </div>
+                    <span class="points">+100</span>
+                </div>
+            </section>
+            
+            <section class="section-card">
+                <h2>Recent Activity</h2>
+                <table class="activity-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Coins</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2023-10-26</td>
+                            <td>Submitted Internship Experience</td>
+                            <td class="coin-change coin-positive">+50</td>
+                        </tr>
+                        <tr>
+                            <td>2023-10-24</td>
+                            <td>Attended Resume Workshop $5 Gift Card</td>
+                            <td class="coin-change coin-negative">-100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
