@@ -7,6 +7,18 @@ let experienceManager, authHandler;
  * Initializes the page by rendering the experiences and attaching event listeners.
  * This function is called once the DOM is fully loaded.
  */
+// Ensure Lucide icons are correctly rendered
+lucide.createIcons();
+
+// Get the necessary elements
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navContainer = document.querySelector('.nav-container');
+
+// Function to toggle the mobile menu
+function toggleMobileMenu() {
+    navContainer.classList.toggle('mobile-menu-open');
+}
+
 function initializePage() {
     authHandler = new AuthHandler();
     experienceManager = new ExperienceManager();

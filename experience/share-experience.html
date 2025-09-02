@@ -6,18 +6,308 @@
     <title>Share Your Experience</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="./share-experience.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Variables */
+        :root {
+            --background: hsl(0, 0%, 100%);
+            --foreground: hsl(222, 84%, 4.9%);
+            --primary: hsl(250, 84%, 54%);
+            --primary-foreground: hsl(0, 0%, 100%);
+            --primary-glow: hsl(245, 100%, 72%);
+            --secondary: hsl(240, 5%, 96%);
+            --secondary-foreground: hsl(240, 6%, 10%);
+            --success: hsl(142, 76%, 36%);
+            --success-foreground: hsl(0, 0%, 100%);
+            --internship: hsl(36, 100%, 50%);
+            --placement: hsl(142, 76%, 36%);
+            --hackathon: hsl(271, 81%, 56%);
+            --event: hsl(217, 91%, 60%);
+            --card: hsl(0, 0%, 100%);
+            --card-foreground: hsl(222, 84%, 4.9%);
+            --muted: hsl(240, 5%, 96%);
+            --muted-foreground: hsl(240, 4%, 46%);
+            --accent: hsl(240, 5%, 96%);
+            --accent-foreground: hsl(240, 6%, 10%);
+            --border: hsl(240, 6%, 90%);
+            --input: hsl(240, 6%, 90%);
+            --ring: hsl(250, 84%, 54%);
+            --destructive: hsl(0, 84%, 60%);
+            --destructive-foreground: hsl(0, 0%, 100%);
+            --gradient-hero: linear-gradient(135deg, hsl(250, 84%, 54%) 0%, hsl(245, 100%, 72%) 100%);
+            --gradient-card: linear-gradient(145deg, hsl(0, 0%, 100%) 0%, hsl(240, 5%, 98%) 100%);
+            --gradient-success: linear-gradient(135deg, hsl(142, 76%, 36%) 0%, hsl(142, 76%, 46%) 100%);
+            --shadow-card: 0 4px 6px -1px hsla(240, 6%, 90%, 0.1), 0 2px 4px -1px hsla(240, 6%, 90%, 0.06);
+            --shadow-hero: 0 20px 25px -5px hsla(250, 84%, 54%, 0.1), 0 10px 10px -5px hsla(250, 84%, 54%, 0.04);
+            --shadow-floating: 0 25px 50px -12px hsla(250, 84%, 54%, 0.25);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --radius: 0.5rem;
+        }
+
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #e0e7ff, #f0f2f5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 4rem 1rem 1rem;
+        }
+
+        /* Utility classes */
+        .desktop { display: block; }
+        .mobile { display: none; }
+        @media (max-width: 768px) {
+            .desktop { display: none; }
+            .mobile { display: block; }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-align: center;
+        }
+        .btn-ghost {
+            background-color: transparent;
+            color: var(--muted-foreground);
+        }
+        .btn-ghost:hover {
+            color: var(--foreground);
+            background: var(--muted);
+        }
+        .btn-hero {
+            background: var(--gradient-hero);
+            color: var(--primary-foreground);
+            box-shadow: var(--shadow-hero);
+        }
+        .btn-hero:hover {
+            box-shadow: var(--shadow-floating);
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: hsla(0, 0%, 100%, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        .logo-icon {
+            width: 2rem;
+            height: 2rem;
+            background: var(--gradient-hero);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition-smooth);
+        }
+        .logo:hover .logo-icon {
+            box-shadow: var(--shadow-hero);
+        }
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .nav-link {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        .nav-link:hover {
+            color: var(--foreground);
+        }
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+        }
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: var(--foreground);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        .close-icon { display: none; }
+        .mobile-menu {
+            display: none;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border);
+            background: hsla(0, 0%, 100%, 0.95);
+            backdrop-filter: blur(12px);
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .mobile-auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .mobile-auth-buttons .btn {
+            width: 100%;
+        }
+        
+        /* Card Styles */
+        .card {
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #4b5563;
+        }
+        .card:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .card-placement { background-color: #f0f9ff; color: #0c4a6e; }
+        .card-internship { background-color: #f0fdf4; color: #166534; }
+        .card-hackathon { background-color: #f5f3ff; color: #5b21b6; }
+        .card-event { background-color: #fffbeb; color: #92400e; }
+        .card-placement .fa-suitcase { color: #3b82f6; }
+        .card-internship .fa-code { color: #22c55e; }
+        .card-hackathon .fa-trophy { color: #8b5cf6; }
+        .card-event .fa-calendar-alt { color: #f59e0b; }
+        .selected-card {
+            border-color: #3b82f6;
+            transform: translateY(-0.5rem);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .selected-card.card-placement { background-color: #dbeafe; }
+        .selected-card.card-internship { background-color: #dcfce7; }
+        .selected-card.card-hackathon { background-color: #ede9fe; }
+        .selected-card.card-event { background-color: #fef3c7; }
+    </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
+<body class="p-4">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-content">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i data-lucide="graduation-cap"></i>
+                    </div>
+                    <span class="logo-text">X Share</span>
+                </a>
 
-    <a href="../index.html" class="absolute top-4 left-4 text-gray-600 hover:text-gray-900 transition-colors flex items-center">
-        <i class="fas fa-arrow-left mr-2"></i> Back to Home
-    </a>
+                <!-- Desktop Navigation -->
+                <div class="nav-links desktop">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../guidance/index.html" class="nav-link">Find Guidance</a>
+                    <a href="../experience/share-experience.html" class="nav-link active">Share Experience</a>
+                    <a href="../reward/index.html" class="nav-link">Rewards</a>
+                </div>
 
-    <div class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-3xl">
+                <!-- Desktop Auth Buttons -->
+                <div class="auth-buttons desktop">
+                    <a href="./public/login.html" class="btn btn-ghost">Login</a>
+                    <a href="./public/login.html?signup=true" class="btn btn-hero">Sign Up</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn mobile">
+                    <i data-lucide="menu" class="menu-icon"></i>
+                    <i data-lucide="x" class="close-icon"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu mobile">
+                <div class="mobile-nav-links">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="../guidance/index.html" class="nav-link">Find Guidance</a>
+                    <a href="../experience/share-experience.html" class="nav-link">Share Experience</a>
+                    <a href="../reward/index.html" class="nav-link">Rewards</a>
+                </div>
+                <div class="mobile-auth-buttons">
+                    <a href="./public/login.html" class="btn btn-ghost">Login</a>
+                    <a href="./public/login.html?signup=true" class="btn btn-hero">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-3xl mt-20">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Share Your Experience</h1>
-            <!-- <span class="text-gray-500 font-medium">Step 1 of 4</span> -->
         </div>
         <div class="bg-gray-200 h-2 rounded-full overflow-hidden mb-8">
             <div class="bg-blue-500 h-2 rounded-full transition-all duration-500 ease-in-out"></div>
@@ -66,6 +356,20 @@
         </div>
     </div>
     
-    <script src="./share-experience.js"></script>
+    <script>
+        // This is a minimal JS script to make the mobile menu work.
+        function toggleMobileMenu() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const menuIcon = document.querySelector('.menu-icon');
+            const closeIcon = document.querySelector('.close-icon');
+
+            mobileMenu.classList.toggle('active');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>

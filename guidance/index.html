@@ -10,7 +10,55 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-100 min-h-screen">
+        <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-content">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i data-lucide="graduation-cap"></i>
+                    </div>
+                    <span class="logo-text">X Share</span>
+                </a>
 
+                <!-- Desktop Navigation -->
+                <div class="nav-links desktop">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../guidance/index.html" class="nav-link active">Find Guidance</a>
+                    <a href="../experience/share-experience.html" class="nav-link">Share Experience</a>
+                    <a href="../reward/index.html" class="nav-link">Rewards</a>
+                </div>
+
+                <!-- Desktop Auth Buttons -->
+                <div class="auth-buttons desktop">
+                    <a href="./public/login.html" class="btn btn-ghost">Login</a>
+                    <a href="./public/login.html?signup=true" class="btn btn-hero">Sign Up</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn mobile" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" class="menu-icon"></i>
+                    <i data-lucide="x" class="close-icon"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu mobile">
+                <div class="mobile-nav-links">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="../guidance/index.html" class="nav-link">Find Guidance</a>
+                    <a href="../experience/share-experience.html" class="nav-link">Share Experience</a>
+                    <a href="../reward/index.html" class="nav-link">Rewards</a>
+                </div>
+                <div class="mobile-auth-buttons">
+                    <a href="./public/login.html" class="btn btn-ghost">Login</a>
+                    <a href="./public/login.html?signup=true" class="btn btn-hero">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
         <!-- Header -->
